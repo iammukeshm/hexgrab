@@ -23,7 +23,18 @@ No PowerToys code (decompiled or original) is in this repo. hexgrab is an indepe
 | Cancel | Right click or **Esc** |
 | Exit | Tray icon → Exit |
 
-## Run it
+## Download
+
+Grab an exe from the [latest release](https://github.com/iammukeshm/hexgrab/releases/latest). Windows 10 or 11, x64.
+
+| File | Size | Needs |
+|------|------|-------|
+| `hexgrab-win-x64.exe` | ~72 MB | Nothing, the .NET runtime is bundled |
+| `hexgrab-win-x64-small.exe` | ~185 KB | The [.NET 10 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/10.0) |
+
+The exe is not code-signed, so Windows SmartScreen will warn you on first run (**More info → Run anyway**). If you'd rather not trust a binary, build it yourself (below). `SHA256SUMS.txt` in the release has the checksums.
+
+## Build from source
 
 Requires the [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) on Windows 10 or 11.
 
@@ -57,6 +68,8 @@ And one thing hexgrab deliberately does **not** copy: PowerToys swaps the system
 dotnet build hexgrab.slnx
 ./tests/e2e/hexgrab-e2e.ps1 -ExePath src/Hexgrab/bin/Debug/net10.0-windows/hexgrab.exe
 ```
+
+Keep the target spot clear of other always-on-top windows; the test stops with an error if something covers it.
 
 It checks: click copies the HEX, the click is swallowed, Esc cancels, Enter copies, hooks are removed after a pick, and a color change under a still cursor is picked up.
 
